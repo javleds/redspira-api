@@ -35,9 +35,9 @@ class SomeClass
 ## Contribution
 
 If you want to contribute, follow next steps:
-    - Fork the project
-    - Create a new branch and perform the necessary changes
-    - Send your pull request 
+- Fork the project
+- Create a new branch and perform the necessary changes
+- Send your pull request 
 
 ## Licence
 
