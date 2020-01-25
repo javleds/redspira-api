@@ -32,6 +32,13 @@ class SomeClass
 
 > Built as part of project: https://github.com/Punksolid/calidad-del-aire
 
+## Contribution
+
+If you want to contribute, follow next steps:
+    - Fork the project
+    - Create a new branch and perform the necessary changes
+    - Send your pull request 
+
 ## Licence
 
 MIT
