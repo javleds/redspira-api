@@ -1,0 +1,40 @@
+{
+    "name": "javleds/redspira-api",
+    "description": "API wrapper for redspira.com",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Javier Ledezma",
+            "email": "juls0593@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "guzzlehttp/guzzle": "^6.5",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Javleds\\RedspiraApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Javleds\\RedspiraApi\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.5"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Javleds\\RedspiraApi\\RedspiraApiServiceProvider"
+            ],
+            "aliases": {
+                "RedspiraApi": "Javleds\\RedspiraApi\\Facades\\RedspiraApi"
+            }
+        }
+    }
+}
