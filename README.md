@@ -2,6 +2,8 @@
 
 Laravel API wrapper for http://app.respira.org.mx/
 
+[![Build Status](https://travis-ci.com/javleds/redspira-api.svg?branch=master)](https://travis-ci.com/javleds/redspira-api)
+
 ## Requirements
 - Laravel 5.7
 - PHP 7.2
