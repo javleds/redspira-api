@@ -43,6 +43,10 @@ class HttpClient implements HttpClientInterface
 
     private function prepareData(array $params = [], array $options = []): array
     {
+        if (config('redspira.debug_requests', false)) {
+            $data['debug'] = true;
+        }
+
         if (Arr::get($options, 'content_type') == "json") {
             $data['json'] = $params;
         } else {

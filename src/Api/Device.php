@@ -5,40 +5,64 @@ namespace Javleds\RedspiraApi\Api;
 use DateTime;
 use DateTimeZone;
 use Exception;
+use Illuminate\Support\Collection;
 use Javleds\RedspiraApi\Contract\Api\DeviceInterface;
+use Javleds\RedspiraApi\DataParameters\DeviceParameters;
+use Javleds\RedspiraApi\Entity\DeviceRegistry;
+use Javleds\RedspiraApi\Exception\ApiResponseException;
+use Javleds\RedspiraApi\Exception\DataParameters\IncompleteParametersException;
 
 class Device extends AbstractApi implements DeviceInterface
 {
     protected $endpoint = '';
 
     /**
-     * @return mixed
+     * @return Collection<DeviceRegistry>
+     * @throws IncompleteParametersException
+     * @throws ApiResponseException
      */
-    public function getData(array $parameters)
+    public function getRegistries(DeviceParameters $parameters)
     {
-        return $this->getClient()->get($this->endpoint, $parameters);
+        $responseRegistries = $this->getClient()->get($this->endpoint, $parameters->prepare());
+
+        if (isset($responseRegistries->error)) {
+            throw new ApiResponseException($responseRegistries->error);
+        }
+
+        $registries = new Collection();
+        foreach ($responseRegistries as $responseRegistry) {
+            $registries->add(
+                new DeviceRegistry(
+                    DateTime::createFromFormat(DeviceParameters::ENDPOINT_DATE_FORMAT, $responseRegistry->interval),
+                    floatval($responseRegistry->val_prom),
+                    intval($responseRegistry->nreg),
+                    floatval($responseRegistry->val_aqi)
+                )
+            );
+        }
+
+        return $registries;
     }
 
     /**
      * @return mixed|void
      * @throws Exception
      */
-    public function getDataForLastHours(string $device, string $pollutant, int $hours, int $timeOffset = -7)
+    public function getDataForLastHours(string $deviceId, string $parameterId, int $hours, int $timeOffset = -7)
     {
         $differenceInHours = sprintf('- %d hour', $hours);
         $startInterval = new DateTime($differenceInHours, new DateTimeZone($timeOffset));
 
         $endInterval = new DateTime('now', new DateTimeZone($timeOffset));
 
-        $parameters = [
-            'idmonitor' => 'A0034',
-            'idparam' => 'pm25',
-            'interval' => 'hour',
-            'datetime1' => $startInterval->format('Y-m-d H:i:s'),
-            'datetime2' => $endInterval->format('Y-m-d H:i:s'),
-            'timeoffset' => $timeOffset,
-        ];
+        $parameters = new DeviceParameters(
+            $deviceId,
+            $parameterId,
+            $startInterval,
+            $endInterval,
+            DeviceParameters::HOUR_INTERVAL
+        );
 
-        return $this->getData($parameters);
+        return $this->getRegistries($parameters);
     }
 }

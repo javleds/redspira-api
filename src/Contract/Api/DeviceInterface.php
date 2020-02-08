@@ -2,15 +2,19 @@
 
 namespace Javleds\RedspiraApi\Contract\Api;
 
+use Illuminate\Support\Collection;
+use Javleds\RedspiraApi\DataParameters\DeviceParameters;
+use Javleds\RedspiraApi\Entity\DeviceRegistry;
+
 interface DeviceInterface extends AbstractApiInterface
 {
     /**
-     * @return mixed
+     * @return Collection<DeviceRegistry>
      */
-    public function getData(array $parameters);
+    public function getRegistries(DeviceParameters $parameters);
 
     /**
-     * @return mixed
+     * @return Collection<DeviceRegistry>
      */
     public function getDataForLastHours(string $device, string $pollutant, int $hours);
 }
