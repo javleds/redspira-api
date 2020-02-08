@@ -13,12 +13,12 @@ class DeviceParametersTest extends BaseTestCaste
     /**
      * @dataProvider getParameters
      *
-     * @param string $idParameter
+     * @param string $parameterId
      * @param bool $shouldThrowException
      *
      * @return void
      */
-    public function testDeviceParametersOnlyReceivesValidParameters(string $idParameter, bool $shouldThrowException)
+    public function testDeviceParametersOnlyReceivesValidParameterIds(string $parameterId, bool $shouldThrowException)
     {
         if ($shouldThrowException) {
             $this->expectException(InvalidIdParameterException::class);
@@ -26,10 +26,13 @@ class DeviceParametersTest extends BaseTestCaste
 
         $deviceParameters = new DeviceParameters(
             'A0003',
-            $idParameter
+            $parameterId,
+            now(),
+            now(),
+            DeviceParameters::HOUR_INTERVAL
         );
 
-        $this->assertSame($idParameter, $deviceParameters->getIdParameter());
+        $this->assertSame($parameterId, $deviceParameters->getIdParameter());
     }
 
     public function getParameters(): array
@@ -45,13 +48,13 @@ class DeviceParametersTest extends BaseTestCaste
     /**
      * @dataProvider getIntervals
      *
-     * @param string $idParameter
+     * @param string $parameterId
      * @param string $interval
      * @param bool $shouldThrowException
      *
      * @return void
      */
-    public function testDeviceParametersOnlyReceivesValidIntervals(string $idParameter, string $interval, bool $shouldThrowException)
+    public function testDeviceParametersOnlyReceivesValidIntervals(string $parameterId, string $interval, bool $shouldThrowException)
     {
         if ($shouldThrowException) {
             $this->expectException(InvalidIntervalValueException::class);
@@ -59,10 +62,11 @@ class DeviceParametersTest extends BaseTestCaste
 
         $deviceParameters = new DeviceParameters(
             'A0003',
-            $idParameter
+            $parameterId,
+            now(),
+            now(),
+            $interval
         );
-
-        $deviceParameters->setInterval($interval);
 
         $this->assertSame($interval, $deviceParameters->getInterval());
     }

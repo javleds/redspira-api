@@ -2,22 +2,29 @@
 
 namespace Javleds\RedspiraApi\DataParameters;
 
+use Carbon\Carbon;
 use DateTime;
+use DateTimeZone;
+use Exception;
+use Javleds\RedspiraApi\Contract\ApiParameter;
+use Javleds\RedspiraApi\Exception\DataParameters\IncompleteParametersException;
 use Javleds\RedspiraApi\Exception\DataParameters\InvalidIdParameterException;
 use Javleds\RedspiraApi\Exception\DataParameters\InvalidIntervalValueException;
 
-class DeviceParameters
+class DeviceParameters implements ApiParameter
 {
-    const PM25_PARAMETER = 'pm25';
-    const PM10_PARAMETER = 'pm10';
+    const PM25_PARAMETER = 'PM25';
+    const PM10_PARAMETER = 'PM10';
 
     const HOUR_INTERVAL = 'hour';
 
-    /** @var string */
-    private $idMonitor;
+    const ENDPOINT_DATE_FORMAT = 'Y-m-d H:i:s';
 
     /** @var string */
-    private $idParameter;
+    private $monitorId;
+
+    /** @var string */
+    private $parameterId;
 
     /** @var string */
     private $interval;
@@ -32,31 +39,35 @@ class DeviceParameters
     private $timeOffset;
 
     public function __construct(
-        string $idMonitor,
-        string $idParameter,
-        DateTime $startDate = null,
-        DateTime $endDate = null,
-        string $interval = self::HOUR_INTERVAL,
+        string $monitorId,
+        string $parameterId,
+        DateTime $startDate,
+        DateTime $endDate,
+        string $interval,
         int $timeOffset = -7
     ) {
-        $this->idMonitor = $idMonitor;
-        $this->setIdParameter($idParameter);
+        $this->setMonitorId($monitorId);
+        $this->setIdParameter($parameterId);
+        $this->setStartDate($startDate);
+        $this->setEndDate($endDate);
+        $this->setInterval($interval);
+        $this->setTimeOffset($timeOffset);
     }
 
     /**
      * @return string
      */
-    public function getIdMonitor(): string
+    public function getMonitorId(): string
     {
-        return $this->idMonitor;
+        return $this->monitorId;
     }
 
     /**
-     * @param string $idMonitor
+     * @param string $monitorId
      */
-    public function setIdMonitor(string $idMonitor): void
+    public function setMonitorId(string $monitorId): void
     {
-        $this->idMonitor = $idMonitor;
+        $this->monitorId = $monitorId;
     }
 
     /**
@@ -64,21 +75,21 @@ class DeviceParameters
      */
     public function getIdParameter(): string
     {
-        return $this->idParameter;
+        return $this->parameterId;
     }
 
     /**
-     * @param string $idParameter
+     * @param string $parameterId
      */
-    public function setIdParameter(string $idParameter): void
+    public function setIdParameter(string $parameterId): void
     {
         $allowedParameters = [self::PM25_PARAMETER, self::PM10_PARAMETER];
 
-        if (!in_array($idParameter, $allowedParameters)) {
+        if (!in_array($parameterId, $allowedParameters)) {
             throw new InvalidIdParameterException($allowedParameters);
         }
 
-        $this->idParameter = $idParameter;
+        $this->parameterId = $parameterId;
     }
 
     /**
@@ -149,5 +160,44 @@ class DeviceParameters
     public function setTimeOffset(int $timeOffset): void
     {
         $this->timeOffset = $timeOffset;
+    }
+
+    /**
+     * @return array
+     * @throws IncompleteParametersException
+     * @throws Exception
+     */
+    public function prepare(): array
+    {
+        if (is_null($this->startDate) || is_null($this->endDate)) {
+            throw new IncompleteParametersException(self::class, [
+                'monitorId',
+                'parameterId',
+                'interval',
+                'startDate',
+                'endDate',
+            ]);
+        }
+
+        $startInterval = Carbon::createFromFormat(
+            self::ENDPOINT_DATE_FORMAT,
+            $this->startDate->format(self::ENDPOINT_DATE_FORMAT),
+            $this->timeOffset
+        );
+
+        $endInterval = Carbon::createFromFormat(
+            self::ENDPOINT_DATE_FORMAT,
+            $this->endDate->format(self::ENDPOINT_DATE_FORMAT),
+            $this->timeOffset
+        );
+
+        return [
+            'idmonitor' => $this->monitorId,
+            'idparam' => $this->parameterId,
+            'interval' => $this->interval,
+            'datetime1' => $startInterval->toDateTimeString(),
+            'datetime2' => $endInterval->toDateTimeString(),
+            'timeoffset' => $this->timeOffset,
+        ];
     }
 }
