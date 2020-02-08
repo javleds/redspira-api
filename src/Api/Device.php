@@ -12,6 +12,8 @@ class Device extends AbstractApi implements DeviceInterface
     protected $endpoint = '';
 
     /**
+     * @TODO: Implement DeviceParameters parameter instead array
+     *
      * @return mixed
      */
     public function getData(array $parameters)

@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Javleds\RedspiraApi\Exception;
+namespace Javleds\RedspiraApi\Exception\DataParameters;
 
 
 use InvalidArgumentException;
 use Throwable;
 
-class InvalidDeviceIntervalValueException extends InvalidArgumentException
+class InvalidIntervalValueException extends InvalidArgumentException
 {
     /** @var string[] */
     protected $allowedIntervalValues;
