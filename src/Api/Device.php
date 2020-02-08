@@ -45,15 +45,17 @@ class Device extends AbstractApi implements DeviceInterface
     }
 
     /**
-     * @return mixed|void
+     * @return Collection<DeviceRegistry>
      * @throws Exception
      */
-    public function getDataForLastHours(string $deviceId, string $parameterId, int $hours, int $timeOffset = -7)
+    public function getRegistriesForLastHours(string $deviceId, string $parameterId, int $hours, int $timeOffset = -7)
     {
-        $differenceInHours = sprintf('- %d hour', $hours);
-        $startInterval = new DateTime($differenceInHours, new DateTimeZone($timeOffset));
+        $endInterval = new DateTime();
 
-        $endInterval = new DateTime('now', new DateTimeZone($timeOffset));
+        $differenceInHours = sprintf('- %d hour', $hours);
+        $startInterval = clone $endInterval;
+        $startInterval->modify($differenceInHours);
+
 
         $parameters = new DeviceParameters(
             $deviceId,

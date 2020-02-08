@@ -16,5 +16,5 @@ interface DeviceInterface extends AbstractApiInterface
     /**
      * @return Collection<DeviceRegistry>
      */
-    public function getDataForLastHours(string $device, string $pollutant, int $hours);
+    public function getRegistriesForLastHours(string $device, string $parameterId, int $hours);
 }

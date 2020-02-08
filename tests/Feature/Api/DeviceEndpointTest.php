@@ -11,6 +11,7 @@ use Javleds\RedspiraApi\Tests\BaseTestCaste;
 
 class DeviceEndpointTest extends BaseTestCaste
 {
+    const DEVICE_ID = 'A0034';
     /**
      * @dataProvider getParameterIds
      *
@@ -22,7 +23,7 @@ class DeviceEndpointTest extends BaseTestCaste
         $endInterval = DateTime::createFromFormat('Y-m-d H:i:s', '2020-02-08 00:00:00');
 
         $parameters = new DeviceParameters(
-            'A0034',
+            self::DEVICE_ID,
             $parameterId,
             $startInterval,
             $endInterval,
@@ -50,19 +51,11 @@ class DeviceEndpointTest extends BaseTestCaste
      */
     public function testDeviceGetRegistriesByHours()
     {
-        $endInterval = new DateTime();
-        $startInterval = clone $endInterval;
-        $startInterval->modify('- 12 hour');
-
-        $parameters = new DeviceParameters(
-            'A0034',
+        $registries = RedspiraApi::device()->getRegistriesForLastHours(
+            self::DEVICE_ID,
             DeviceParameters::PM10_PARAMETER,
-            $startInterval,
-            $endInterval,
-            DeviceParameters::HOUR_INTERVAL
+            12
         );
-
-        $registries = RedspiraApi::device()->getRegistries($parameters);
 
         $this->assertNotEmpty($registries);
     }
