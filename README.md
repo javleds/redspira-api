@@ -15,18 +15,40 @@ composer require javleds/redspira-api
 ```
 
 ## Usage
-By now, Redspira API has only one endpoint, but it is going to grow up with the time
 
-#### Device
+#### Get device registries
 ```
 class SomeClass
 {
     public function example()
-    {        
-        \RedspiraApi::device()->getDataForLastHours(
-            'A0034', // device 
-            'pm25',  // pollutant
-            12 // hours
+    {
+        $parameters = new Javleds\RedspiraApi\DataParameters\DeviceParameters(
+            $deviceId, // string Monitor identifier       
+            $parameterId, // string Parameter or pollutant [DeviceParameters::PM25_PARAMETER|DeviceParameters::PM10_PARAMETER]
+            $startDate, // DateTime First date for filtering device entries       
+            $endDate, // DateTime Last date for filtering device entries      
+            $interval, // string Intervl of time [DeviceParameters::HOUR_INTERVAL]      
+            $tomeOffset, // (opt) int Time offset       
+        );        
+        
+        /** @var Collection<DeviceRegistry> $registries **/
+        $registries = \RedspiraApi::device()->getRegistries($parameters);        
+    }
+}
+```
+
+#### Get device registries for last hours
+```
+class SomeClass
+{
+    public function example()
+    {
+        /** @var Collection<DeviceRegistry> $registries **/
+        $registries = \RedspiraApi::device()->getRegistriesForLastHours(
+            $deviceId, // string Monitor identifier
+            $parameterId, // string Parameter or pollutant [DeviceParameters::PM25_PARAMETER|DeviceParameters::PM10_PARAMETER]
+            $hours, // int Hours of interest before now
+            $timeOffset // (opt) int Tome offset
         );        
     }
 }
