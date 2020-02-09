@@ -2,6 +2,7 @@
 
 namespace Javleds\RedspiraApi\Api;
 
+use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
 use Exception;
@@ -50,19 +51,19 @@ class Device extends AbstractApi implements DeviceInterface
      */
     public function getRegistriesForLastHours(string $deviceId, string $parameterId, int $hours, int $timeOffset = -7)
     {
-        $endInterval = new DateTime();
+        $endInterval = Carbon::now($timeOffset);
 
-        $differenceInHours = sprintf('- %d hour', $hours);
         $startInterval = clone $endInterval;
-        $startInterval->modify($differenceInHours);
+        $startInterval->subHours($hours);
 
 
         $parameters = new DeviceParameters(
             $deviceId,
             $parameterId,
-            $startInterval,
-            $endInterval,
-            DeviceParameters::HOUR_INTERVAL
+            $startInterval->toDateTime(),
+            $endInterval->toDateTime(),
+            DeviceParameters::HOUR_INTERVAL,
+            $timeOffset
         );
 
         return $this->getRegistries($parameters);

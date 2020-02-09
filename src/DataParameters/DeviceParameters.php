@@ -185,6 +185,8 @@ class DeviceParameters implements ApiParameter
             $this->timeOffset
         );
 
+        $startInterval->subHours(1);
+
         $endInterval = Carbon::createFromFormat(
             self::ENDPOINT_DATE_FORMAT,
             $this->endDate->format(self::ENDPOINT_DATE_FORMAT),

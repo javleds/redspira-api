@@ -51,12 +51,16 @@ class DeviceEndpointTest extends BaseTestCaste
      */
     public function testDeviceGetRegistriesByHours()
     {
+        $hours = 12;
         $registries = RedspiraApi::device()->getRegistriesForLastHours(
             self::DEVICE_ID,
             DeviceParameters::PM10_PARAMETER,
-            12
+            $hours
         );
 
+        $size = $registries->count();
+
         $this->assertNotEmpty($registries);
+        $this->assertSame($hours, $size);
     }
 }
