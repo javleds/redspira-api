@@ -25,7 +25,8 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^4.5"
+        "orchestra/testbench": "^4.5",
+        "nunomaduro/phpinsights": "^1.13"
     },
     "extra": {
         "laravel": {
