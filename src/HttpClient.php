@@ -22,7 +22,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return mixed|string
+     * @return array|string
      * @throws Exception
      */
     public function get(string $endpoint, array $params = [], array $options = [])
@@ -32,7 +32,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return mixed|string
+     * @return array|string
      * @throws Exception
      */
     public function post(string $endpoint, array $params = [], array $options = [])
@@ -59,7 +59,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return mixed|string
+     * @return array|string
      * @throws Exception
      */
     private function buildResponse(ResponseInterface $response)
@@ -79,7 +79,7 @@ class HttpClient implements HttpClientInterface
     /**
      * @param array|string $contentType
      *
-     * @return array|string
+     * @return string
      * @throws Exception
      */
     private function getContentType($contentType)
