@@ -14,7 +14,7 @@ class InvalidIntervalValueException extends InvalidArgumentException
 
     /**
      * @param string[] $allowedIntervalValues
-     * @param int $code
+     * @param int|null $code
      * @param Throwable|null $previous
      *
      * @return void

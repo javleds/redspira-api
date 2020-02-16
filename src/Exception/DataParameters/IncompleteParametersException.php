@@ -11,8 +11,8 @@ class IncompleteParametersException extends Exception
      * IncompleteParametersException constructor.
      *
      * @param string $className
-     * @param array $requiredFields
-     * @param int $code
+     * @param array|null $requiredFields
+     * @param int|null $code
      * @param Throwable|null $previous
      */
     public function __construct(string $className, array $requiredFields = [], $code = 0, Throwable $previous = null)

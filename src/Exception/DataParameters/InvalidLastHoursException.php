@@ -8,7 +8,7 @@ use Throwable;
 class InvalidLastHoursException extends InvalidArgumentException
 {
     /**
-     * @param int $code
+     * @param int|null $code
      * @param Throwable|null $previous
      *
      * @return void
