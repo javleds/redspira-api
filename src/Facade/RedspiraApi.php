@@ -10,7 +10,7 @@ use Javleds\RedspiraApi\Contract\Api\DeviceInterface;
  */
 class RedspiraApi extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return 'redspira-api';
     }
