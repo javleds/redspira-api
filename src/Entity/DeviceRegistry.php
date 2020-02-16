@@ -30,8 +30,8 @@ class DeviceRegistry
     {
         $this->interval = $interval;
         $this->valProm  = $valProm;
-        $this->nreg     = $nreg;
-        $this->valAqi   = $valAqi;
+        $this->nreg = $nreg;
+        $this->valAqi = $valAqi;
     }
 
     public function getInterval(): DateTime
