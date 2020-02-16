@@ -49,7 +49,7 @@ class HttpClient implements IHttpClient
             $data['debug'] = true;
         }
 
-        if (Arr::get($options, 'content_type') === "json") {
+        if (Arr::get($options, 'content_type') === 'json') {
             $data['json'] = $params;
         } else {
             $data['query'] = http_build_query($params);
