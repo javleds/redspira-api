@@ -5,11 +5,11 @@ namespace Javleds\RedspiraApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Arr;
-use Javleds\RedspiraApi\Contract\HttpClientInterface;
+use Javleds\RedspiraApi\Contract\HttpClient as IHttpClient;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 
-class HttpClient implements HttpClientInterface
+class HttpClient implements IHttpClient
 {
     /** @var ClientInterface */
     protected $client;
@@ -22,7 +22,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return mixed|string
+     * @return array|string
      * @throws Exception
      */
     public function get(string $endpoint, array $params = [], array $options = [])
@@ -32,7 +32,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return mixed|string
+     * @return array|string
      * @throws Exception
      */
     public function post(string $endpoint, array $params = [], array $options = [])
@@ -43,11 +43,13 @@ class HttpClient implements HttpClientInterface
 
     private function prepareData(array $params = [], array $options = []): array
     {
+        $data = [];
+
         if (config('redspira.debug_requests', false)) {
             $data['debug'] = true;
         }
 
-        if (Arr::get($options, 'content_type') === "json") {
+        if (Arr::get($options, 'content_type') === 'json') {
             $data['json'] = $params;
         } else {
             $data['query'] = http_build_query($params);
@@ -57,7 +59,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return mixed|string
+     * @return array|string
      * @throws Exception
      */
     private function buildResponse(ResponseInterface $response)
@@ -77,7 +79,7 @@ class HttpClient implements HttpClientInterface
     /**
      * @param array|string $contentType
      *
-     * @return array|string
+     * @return string
      * @throws Exception
      */
     private function getContentType($contentType)

@@ -2,7 +2,7 @@
 
 namespace Javleds\RedspiraApi\Tests\Feature;
 
-use Javleds\RedspiraApi\Contract\Api\DeviceInterface;
+use Javleds\RedspiraApi\Contract\Api\Device;
 use Javleds\RedspiraApi\Facade\RedspiraApi;
 use Javleds\RedspiraApi\Tests\BaseTestCaste;
 
@@ -12,7 +12,7 @@ class DeviceTest extends BaseTestCaste
     {
         $device = RedspiraApi::device();
         $this->assertInstanceOf(
-            DeviceInterface::class,
+            Device::class,
             $device
         );
     }

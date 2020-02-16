@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Javleds\RedspiraApi\Exception\DataParameters;
-
 
 use InvalidArgumentException;
 use Throwable;
@@ -12,7 +10,14 @@ class InvalidIntervalValueException extends InvalidArgumentException
     /** @var string[] */
     protected $allowedIntervalValues;
 
-    public function __construct($allowedIntervalValues, $code = 0, Throwable $previous = null)
+    /**
+     * @param string[] $allowedIntervalValues
+     * @param int|null $code
+     * @param Throwable|null $previous
+     *
+     * @return void
+     */
+    public function __construct(array $allowedIntervalValues, $code = 0, Throwable $previous = null)
     {
         $this->allowedIntervalValues = $allowedIntervalValues;
 

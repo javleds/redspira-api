@@ -2,7 +2,7 @@
 
 namespace Javleds\RedspiraApi\Contract\Api;
 
-interface AbstractApiInterface
+interface Api
 {
     public function getEndpoint(): string;
 }

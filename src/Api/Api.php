@@ -2,22 +2,22 @@
 
 namespace Javleds\RedspiraApi\Api;
 
-use Javleds\RedspiraApi\Contract\HttpClientInterface;
+use Javleds\RedspiraApi\Contract\HttpClient;
 
-abstract class AbstractApi
+abstract class Api
 {
-    /** @var HttpClientInterface */
+    /** @var HttpClient */
     private $client;
 
     /** @var string */
     protected $endpoint;
 
-    public function __construct(HttpClientInterface $client)
+    public function __construct(HttpClient $client)
     {
         $this->client = $client;
     }
 
-    public function getClient(): HttpClientInterface
+    public function getClient(): HttpClient
     {
         return $this->client;
     }

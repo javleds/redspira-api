@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Javleds\RedspiraApi\DataParameters\DeviceParameters;
 use Javleds\RedspiraApi\Entity\DeviceRegistry;
 
-interface DeviceInterface extends AbstractApiInterface
+interface Device extends Api
 {
     /**
      * @return Collection<DeviceRegistry>
