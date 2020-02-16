@@ -43,6 +43,8 @@ class HttpClient implements HttpClientInterface
 
     private function prepareData(array $params = [], array $options = []): array
     {
+        $data = [];
+
         if (config('redspira.debug_requests', false)) {
             $data['debug'] = true;
         }
