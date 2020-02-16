@@ -4,7 +4,6 @@ namespace Javleds\RedspiraApi\Api;
 
 use Carbon\Carbon;
 use DateTime;
-use DateTimeZone;
 use Exception;
 use Illuminate\Support\Collection;
 use Javleds\RedspiraApi\Contract\Api\DeviceInterface;
@@ -15,6 +14,7 @@ use Javleds\RedspiraApi\Exception\DataParameters\IncompleteParametersException;
 
 class Device extends AbstractApi implements DeviceInterface
 {
+    /** @var string  */
     protected $endpoint = '';
 
     /**
