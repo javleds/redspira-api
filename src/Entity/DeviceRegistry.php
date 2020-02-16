@@ -34,65 +34,41 @@ class DeviceRegistry
         $this->valAqi   = $valAqi;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getInterval(): DateTime
     {
         return $this->interval;
     }
 
-    /**
-     * @param DateTime $interval
-     */
     public function setInterval(DateTime $interval): void
     {
         $this->interval = $interval;
     }
 
-    /**
-     * @return float
-     */
     public function getValProm(): float
     {
         return $this->valProm;
     }
 
-    /**
-     * @param float $valProm
-     */
     public function setValProm(float $valProm): void
     {
         $this->valProm = $valProm;
     }
 
-    /**
-     * @return int
-     */
     public function getNreg(): int
     {
         return $this->nreg;
     }
 
-    /**
-     * @param int $nreg
-     */
     public function setNreg(int $nreg): void
     {
         $this->nreg = $nreg;
     }
 
-    /**
-     * @return float
-     */
     public function getValAqi(): float
     {
         return $this->valAqi;
     }
 
-    /**
-     * @param float $valAqi
-     */
     public function setValAqi(float $valAqi): void
     {
         $this->valAqi = $valAqi;
