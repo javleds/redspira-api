@@ -53,33 +53,21 @@ class DeviceParameters implements ApiParameter
         $this->setTimeOffset($timeOffset);
     }
 
-    /**
-     * @return string
-     */
     public function getMonitorId(): string
     {
         return $this->monitorId;
     }
 
-    /**
-     * @param string $monitorId
-     */
     public function setMonitorId(string $monitorId): void
     {
         $this->monitorId = $monitorId;
     }
 
-    /**
-     * @return string
-     */
     public function getIdParameter(): string
     {
         return $this->parameterId;
     }
 
-    /**
-     * @param string $parameterId
-     */
     public function setIdParameter(string $parameterId): void
     {
         $allowedParameters = [self::PM25_PARAMETER, self::PM10_PARAMETER];
@@ -91,17 +79,11 @@ class DeviceParameters implements ApiParameter
         $this->parameterId = $parameterId;
     }
 
-    /**
-     * @return string
-     */
     public function getInterval(): string
     {
         return $this->interval;
     }
 
-    /**
-     * @param string $interval
-     */
     public function setInterval(string $interval): void
     {
         $allowedIntervals = [self::HOUR_INTERVAL];
@@ -113,49 +95,31 @@ class DeviceParameters implements ApiParameter
         $this->interval = $interval;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getStartDate(): DateTime
     {
         return $this->startDate;
     }
 
-    /**
-     * @param DateTime $startDate
-     */
     public function setStartDate(DateTime $startDate): void
     {
         $this->startDate = $startDate;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getEndDate(): DateTime
     {
         return $this->endDate;
     }
 
-    /**
-     * @param DateTime $endDate
-     */
     public function setEndDate(DateTime $endDate): void
     {
         $this->endDate = $endDate;
     }
 
-    /**
-     * @return int
-     */
     public function getTimeOffset(): int
     {
         return $this->timeOffset;
     }
 
-    /**
-     * @param int $timeOffset
-     */
     public function setTimeOffset(int $timeOffset): void
     {
         $this->timeOffset = $timeOffset;
