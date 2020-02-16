@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Javleds\RedspiraApi\Exception\DataParameters;
-
 
 use InvalidArgumentException;
 use Throwable;
