@@ -25,7 +25,7 @@ class RedspiraApiServiceProvider extends ServiceProvider
             'redspira'
         );
 
-        $this->app->singleton('redspira-api', function () {
+        $this->app->singleton('redspira-api', static function () {
             $baseClient = new HttpClient(config('redspira.base_url'));
             $apiClient = new HttpClient(config('redspira.api_base_url'));
             return new \Javleds\RedspiraApi\Redspira($baseClient, $apiClient);
