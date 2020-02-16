@@ -4,7 +4,6 @@ namespace Javleds\RedspiraApi\DataParameters;
 
 use Carbon\Carbon;
 use DateTime;
-use DateTimeZone;
 use Exception;
 use Javleds\RedspiraApi\Contract\ApiParameter;
 use Javleds\RedspiraApi\Exception\DataParameters\IncompleteParametersException;
@@ -13,12 +12,12 @@ use Javleds\RedspiraApi\Exception\DataParameters\InvalidIntervalValueException;
 
 class DeviceParameters implements ApiParameter
 {
-    const PM25_PARAMETER = 'PM25';
-    const PM10_PARAMETER = 'PM10';
+    public const PM25_PARAMETER = 'PM25';
+    public const PM10_PARAMETER = 'PM10';
 
-    const HOUR_INTERVAL = 'hour';
+    public const HOUR_INTERVAL = 'hour';
 
-    const ENDPOINT_DATE_FORMAT = 'Y-m-d H:i:s';
+    public const ENDPOINT_DATE_FORMAT = 'Y-m-d H:i:s';
 
     /** @var string */
     private $monitorId;
