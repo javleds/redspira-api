@@ -5,11 +5,11 @@ namespace Javleds\RedspiraApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Arr;
-use Javleds\RedspiraApi\Contract\HttpClientInterface;
+use Javleds\RedspiraApi\Contract\HttpClient as IHttpClient;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 
-class HttpClient implements HttpClientInterface
+class HttpClient implements IHttpClient
 {
     /** @var ClientInterface */
     protected $client;

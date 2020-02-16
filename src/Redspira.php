@@ -4,8 +4,8 @@ namespace Javleds\RedspiraApi;
 
 use GuzzleHttp\ClientInterface;
 use Javleds\RedspiraApi\Api\Device;
-use Javleds\RedspiraApi\Contract\Api\DeviceInterface;
-use Javleds\RedspiraApi\Contract\HttpClientInterface;
+use Javleds\RedspiraApi\Contract\Api\Device as IDevice;
+use Javleds\RedspiraApi\Contract\HttpClient;
 
 class Redspira
 {
@@ -15,13 +15,13 @@ class Redspira
     /** @var ClientInterface */
     private $apiClient;
 
-    public function __construct(HttpClientInterface $baseClient, HttpClientInterface $apiClient)
+    public function __construct(HttpClient $baseClient, HttpClient $apiClient)
     {
         $this->baseClient = $baseClient;
         $this->apiClient = $apiClient;
     }
 
-    public function device(): DeviceInterface
+    public function device(): IDevice
     {
         return new Device($this->apiClient);
     }

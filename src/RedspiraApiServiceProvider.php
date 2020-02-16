@@ -2,9 +2,7 @@
 
 namespace Javleds\RedspiraApi;
 
-use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
-use Javleds\RedspiraApi\Contract\HttpClientInterface;
 
 class RedspiraApiServiceProvider extends ServiceProvider
 {
@@ -26,8 +24,8 @@ class RedspiraApiServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton('redspira-api', static function () {
-            $baseClient = new HttpClient(config('redspira.base_url'));
-            $apiClient = new HttpClient(config('redspira.api_base_url'));
+            $baseClient = new \Javleds\RedspiraApi\HttpClient(config('redspira.base_url'));
+            $apiClient = new \Javleds\RedspiraApi\HttpClient(config('redspira.api_base_url'));
             return new \Javleds\RedspiraApi\Redspira($baseClient, $apiClient);
         });
     }

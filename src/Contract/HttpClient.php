@@ -2,9 +2,7 @@
 
 namespace Javleds\RedspiraApi\Contract;
 
-use GuzzleHttp\ClientInterface;
-
-interface HttpClientInterface
+interface HttpClient
 {
     public function get(string $endpoint, array $params = [], array $options = []);
 

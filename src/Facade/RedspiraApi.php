@@ -3,10 +3,10 @@
 namespace Javleds\RedspiraApi\Facade;
 
 use Illuminate\Support\Facades\Facade;
-use Javleds\RedspiraApi\Contract\Api\DeviceInterface;
+use Javleds\RedspiraApi\Contract\Api\Device;
 
 /**
- * @method static DeviceInterface device()
+ * @method static Device device()
  */
 class RedspiraApi extends Facade
 {

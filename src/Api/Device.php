@@ -6,13 +6,13 @@ use Carbon\Carbon;
 use DateTime;
 use Exception;
 use Illuminate\Support\Collection;
-use Javleds\RedspiraApi\Contract\Api\DeviceInterface;
+use Javleds\RedspiraApi\Contract\Api\Device as IDevice;
 use Javleds\RedspiraApi\DataParameters\DeviceParameters;
 use Javleds\RedspiraApi\Entity\DeviceRegistry;
 use Javleds\RedspiraApi\Exception\ApiResponseException;
 use Javleds\RedspiraApi\Exception\DataParameters\IncompleteParametersException;
 
-class Device extends AbstractApi implements DeviceInterface
+class Device extends Api implements IDevice
 {
     /** @var string  */
     protected $endpoint = '';
