@@ -2,6 +2,7 @@
 
 namespace Javleds\RedspiraApi\Tests;
 
+use Javleds\RedspiraApi\Facade\DeviceRegistryRepository;
 use Javleds\RedspiraApi\Facade\RedspiraApi;
 use Javleds\RedspiraApi\RedspiraApiServiceProvider;
 use Orchestra\Testbench\TestCase;
@@ -19,6 +20,7 @@ class BaseTestCaste extends TestCase
     {
         return [
             'RedspiraApi' => RedspiraApi::class,
+            'DeviceRegistryRepository' => DeviceRegistryRepository::class,
         ];
     }
 }

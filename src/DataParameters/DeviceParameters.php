@@ -16,8 +16,10 @@ class DeviceParameters implements ApiParameter
     public const PM10_PARAMETER = 'PM10';
 
     public const HOUR_INTERVAL = 'hour';
+    public const DAY_INTERVAL = 'day';
 
-    public const ENDPOINT_DATE_FORMAT = 'Y-m-d H:i:s';
+    public const ENDPOINT_DATETIME_FORMAT = 'Y-m-d H:i:s';
+    public const ENDPOINT_DATE_FORMAT = 'Y-m-d';
 
     /** @var string */
     private $monitorId;
@@ -86,7 +88,10 @@ class DeviceParameters implements ApiParameter
 
     public function setInterval(string $interval): void
     {
-        $allowedIntervals = [self::HOUR_INTERVAL];
+        $allowedIntervals = [
+            self::HOUR_INTERVAL,
+            self::DAY_INTERVAL,
+        ];
 
         if (!in_array($interval, $allowedIntervals)) {
             throw new InvalidIntervalValueException($allowedIntervals);
@@ -143,16 +148,16 @@ class DeviceParameters implements ApiParameter
         }
 
         $startInterval = Carbon::createFromFormat(
-            self::ENDPOINT_DATE_FORMAT,
-            $this->startDate->format(self::ENDPOINT_DATE_FORMAT),
+            self::ENDPOINT_DATETIME_FORMAT,
+            $this->startDate->format(self::ENDPOINT_DATETIME_FORMAT),
             $this->timeOffset
         );
 
         $startInterval->subHours(1);
 
         $endInterval = Carbon::createFromFormat(
-            self::ENDPOINT_DATE_FORMAT,
-            $this->endDate->format(self::ENDPOINT_DATE_FORMAT),
+            self::ENDPOINT_DATETIME_FORMAT,
+            $this->endDate->format(self::ENDPOINT_DATETIME_FORMAT),
             $this->timeOffset
         );
 

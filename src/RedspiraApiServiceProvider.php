@@ -28,6 +28,10 @@ class RedspiraApiServiceProvider extends ServiceProvider
             $apiClient = new \Javleds\RedspiraApi\HttpClient(config('redspira.api_base_url'));
             return new \Javleds\RedspiraApi\Redspira($baseClient, $apiClient);
         });
+
+        $this->app->singleton('device-registry-repository', static function () {
+            return new \Javleds\RedspiraApi\Repository\DeviceRegistryRepository();
+        });
     }
 
     private function getBaseDir(string $path): string

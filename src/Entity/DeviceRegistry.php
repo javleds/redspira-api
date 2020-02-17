@@ -18,6 +18,9 @@ class DeviceRegistry
     /** @var float */
     private $valAqi;
 
+    /** @var string */
+    private $intervalType;
+
     /**
      * DeviceRegistry constructor.
      *
@@ -25,13 +28,15 @@ class DeviceRegistry
      * @param float $valProm
      * @param int $nreg
      * @param float $valAqi
+     * @param string $intervalType
      */
-    public function __construct(DateTime $interval, float $valProm, int $nreg, float $valAqi)
+    public function __construct(DateTime $interval, float $valProm, int $nreg, float $valAqi, string $intervalType)
     {
         $this->interval = $interval;
         $this->valProm  = $valProm;
         $this->nreg = $nreg;
         $this->valAqi = $valAqi;
+        $this->intervalType = $intervalType;
     }
 
     public function getInterval(): DateTime
@@ -72,6 +77,16 @@ class DeviceRegistry
     public function setValAqi(float $valAqi): void
     {
         $this->valAqi = $valAqi;
+    }
+
+    public function getIntervalType(): string
+    {
+        return $this->intervalType;
+    }
+
+    public function setIntervalType(string $intervalType): void
+    {
+        $this->intervalType = $intervalType;
     }
 
 }
