@@ -27,7 +27,7 @@ class SomeClass
             $parameterId, // string Parameter or pollutant [DeviceParameters::PM25_PARAMETER|DeviceParameters::PM10_PARAMETER]
             $startDate, // DateTime First date for filtering device entries       
             $endDate, // DateTime Last date for filtering device entries      
-            $interval, // string Intervl of time [DeviceParameters::HOUR_INTERVAL]      
+            $interval, // string Intervl of time [DeviceParameters::HOUR_INTERVAL|DeviceParameters::MINUTE_INTERVAL]      
             $tomeOffset, // (opt) int Time offset       
         );        
         
@@ -48,6 +48,22 @@ class SomeClass
             $deviceId, // string Monitor identifier
             $parameterId, // string Parameter or pollutant [DeviceParameters::PM25_PARAMETER|DeviceParameters::PM10_PARAMETER]
             $hours, // int Hours of interest before now
+            $timeOffset // (opt) int Tome offset
+        );        
+    }
+}
+
+#### Get device registries for last minutes
+```
+class SomeClass
+{
+    public function example()
+    {
+        /** @var Collection<DeviceRegistry> $registries **/
+        $registries = \RedspiraApi::device()->getRegistriesForLastMinutes(
+            $deviceId, // string Monitor identifier
+            $parameterId, // string Parameter or pollutant [DeviceParameters::PM25_PARAMETER|DeviceParameters::PM10_PARAMETER]
+            $minutes, // int Hours of interest before now
             $timeOffset // (opt) int Tome offset
         );        
     }

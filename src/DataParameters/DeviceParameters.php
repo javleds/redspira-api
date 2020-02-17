@@ -16,6 +16,7 @@ class DeviceParameters implements ApiParameter
     public const PM10_PARAMETER = 'PM10';
 
     public const HOUR_INTERVAL = 'hour';
+    public const MINUTE_INTERVAL = 'minute';
 
     public const ENDPOINT_DATE_FORMAT = 'Y-m-d H:i:s';
 
@@ -86,7 +87,10 @@ class DeviceParameters implements ApiParameter
 
     public function setInterval(string $interval): void
     {
-        $allowedIntervals = [self::HOUR_INTERVAL];
+        $allowedIntervals = [
+            self::HOUR_INTERVAL,
+            self::MINUTE_INTERVAL,
+        ];
 
         if (!in_array($interval, $allowedIntervals)) {
             throw new InvalidIntervalValueException($allowedIntervals);

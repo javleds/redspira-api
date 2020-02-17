@@ -63,4 +63,22 @@ class DeviceEndpointTest extends BaseTestCaste
         $this->assertNotEmpty($registries);
         $this->assertSame($hours, $size);
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testDeviceGetRegistriesByMinutes()
+    {
+        $minutes = 60;
+        $registries = RedspiraApi::device()->getRegistriesForLastHours(
+            self::DEVICE_ID,
+            DeviceParameters::PM10_PARAMETER,
+            $minutes
+        );
+
+        $size = $registries->count();
+
+        $this->assertNotEmpty($registries);
+        $this->assertSame($minutes, $size);
+    }
 }

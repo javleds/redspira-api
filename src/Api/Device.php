@@ -68,4 +68,28 @@ class Device extends Api implements IDevice
 
         return $this->getRegistries($parameters);
     }
+
+    /**
+     * @return Collection<DeviceRegistry>
+     * @throws Exception
+     */
+    public function getRegistriesForLastMinutes(string $deviceId, string $parameterId, int $hours, int $timeOffset = -7)
+    {
+        $endInterval = Carbon::now($timeOffset);
+
+        $startInterval = clone $endInterval;
+        $startInterval->subMinutes($hours);
+
+
+        $parameters = new DeviceParameters(
+            $deviceId,
+            $parameterId,
+            $startInterval->toDateTime(),
+            $endInterval->toDateTime(),
+            DeviceParameters::HOUR_INTERVAL,
+            $timeOffset
+        );
+
+        return $this->getRegistries($parameters);
+    }
 }

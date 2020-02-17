@@ -77,6 +77,7 @@ class DeviceParametersTest extends BaseTestCaste
             [DeviceParameters::PM10_PARAMETER, 'someWord', true],
             [DeviceParameters::PM10_PARAMETER, '', true],
             [DeviceParameters::PM10_PARAMETER, DeviceParameters::HOUR_INTERVAL, false],
+            [DeviceParameters::PM10_PARAMETER, DeviceParameters::MINUTE_INTERVAL, false],
         ];
     }
 }
