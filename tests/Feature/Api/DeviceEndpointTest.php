@@ -67,18 +67,21 @@ class DeviceEndpointTest extends BaseTestCaste
     /**
      * @throws Exception
      */
-    public function testDeviceGetRegistriesByMinutes()
+    public function testDeviceGetRegistriesByDays()
     {
-        $minutes = 60;
-        $registries = RedspiraApi::device()->getRegistriesForLastHours(
+        $days = 2;
+        $registries = RedspiraApi::device()->getRegistriesForLastDays(
             self::DEVICE_ID,
             DeviceParameters::PM10_PARAMETER,
-            $minutes
+            $days
         );
 
         $size = $registries->count();
 
         $this->assertNotEmpty($registries);
-        $this->assertSame($minutes, $size);
+
+        // Add one to last days in order to get the current day values
+        $expectedRecords = $days + 1;
+        $this->assertSame($expectedRecords, $size);
     }
 }

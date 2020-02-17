@@ -34,7 +34,8 @@
                 "Javleds\\RedspiraApi\\RedspiraApiServiceProvider"
             ],
             "aliases": {
-                "RedspiraApi": "Javleds\\RedspiraApi\\Facades\\RedspiraApi"
+                "RedspiraApi": "Javleds\\RedspiraApi\\Facades\\RedspiraApi",
+                "DeviceRegistryRepository": "Javleds\\RedspiraApi\\Facades\\DeviceRegistryRepository"
             }
         }
     }

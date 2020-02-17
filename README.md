@@ -52,18 +52,19 @@ class SomeClass
         );        
     }
 }
+```
 
-#### Get device registries for last minutes
+#### Get device registries for last days
 ```
 class SomeClass
 {
     public function example()
     {
         /** @var Collection<DeviceRegistry> $registries **/
-        $registries = \RedspiraApi::device()->getRegistriesForLastMinutes(
+        $registries = \RedspiraApi::device()->getRegistriesForLastDays(
             $deviceId, // string Monitor identifier
             $parameterId, // string Parameter or pollutant [DeviceParameters::PM25_PARAMETER|DeviceParameters::PM10_PARAMETER]
-            $minutes, // int Hours of interest before now
+            $days, // int Days of interest before now
             $timeOffset // (opt) int Tome offset
         );        
     }

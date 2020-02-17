@@ -11,6 +11,7 @@ use Javleds\RedspiraApi\DataParameters\DeviceParameters;
 use Javleds\RedspiraApi\Entity\DeviceRegistry;
 use Javleds\RedspiraApi\Exception\ApiResponseException;
 use Javleds\RedspiraApi\Exception\DataParameters\IncompleteParametersException;
+use Javleds\RedspiraApi\Facade\DeviceRegistryRepository;
 
 class Device extends Api implements IDevice
 {
@@ -33,11 +34,9 @@ class Device extends Api implements IDevice
         $registries = new Collection();
         foreach ($responseRegistries as $responseRegistry) {
             $registries->add(
-                new DeviceRegistry(
-                    DateTime::createFromFormat(DeviceParameters::ENDPOINT_DATE_FORMAT, $responseRegistry->interval),
-                    floatval($responseRegistry->val_prom),
-                    intval($responseRegistry->nreg),
-                    floatval($responseRegistry->val_aqi)
+                DeviceRegistryRepository::apiRegistryToDeviceRegistry(
+                    $responseRegistry,
+                    $parameters->getInterval()
                 )
             );
         }
@@ -73,12 +72,12 @@ class Device extends Api implements IDevice
      * @return Collection<DeviceRegistry>
      * @throws Exception
      */
-    public function getRegistriesForLastMinutes(string $deviceId, string $parameterId, int $hours, int $timeOffset = -7)
+    public function getRegistriesForLastDays(string $deviceId, string $parameterId, int $days, int $timeOffset = -7)
     {
         $endInterval = Carbon::now($timeOffset);
 
         $startInterval = clone $endInterval;
-        $startInterval->subMinutes($hours);
+        $startInterval->subDays($days);
 
 
         $parameters = new DeviceParameters(
@@ -86,7 +85,7 @@ class Device extends Api implements IDevice
             $parameterId,
             $startInterval->toDateTime(),
             $endInterval->toDateTime(),
-            DeviceParameters::HOUR_INTERVAL,
+            DeviceParameters::DAY_INTERVAL,
             $timeOffset
         );
 

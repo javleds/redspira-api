@@ -21,5 +21,5 @@ interface Device extends Api
     /**
      * @return Collection<DeviceRegistry>
      */
-    public function getRegistriesForLastMinutes(string $device, string $parameterId, int $minutes);
+    public function getRegistriesForLastDays(string $device, string $parameterId, int $days);
 }
