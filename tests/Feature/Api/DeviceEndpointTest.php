@@ -12,6 +12,7 @@ use Javleds\RedspiraApi\Tests\BaseTestCaste;
 class DeviceEndpointTest extends BaseTestCaste
 {
     const DEVICE_ID = 'A0034';
+
     /**
      * @dataProvider getParameterIds
      *

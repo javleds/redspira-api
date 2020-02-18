@@ -32,6 +32,10 @@ class RedspiraApiServiceProvider extends ServiceProvider
         $this->app->singleton('device-registry-repository', static function () {
             return new \Javleds\RedspiraApi\Repository\DeviceRegistryRepository();
         });
+
+        $this->app->singleton('area-repository', static function () {
+            return new \Javleds\RedspiraApi\Repository\AreaRepository();
+        });
     }
 
     private function getBaseDir(string $path): string
