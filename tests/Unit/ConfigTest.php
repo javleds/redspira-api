@@ -6,13 +6,23 @@ use Javleds\RedspiraApi\Tests\BaseTestCaste;
 
 class ConfigTest extends BaseTestCaste
 {
-    public function testConfigHasBaseUrl()
+    /**
+     * @dataProvider getConfigPKeys
+     */
+    public function testConfigHasKey(string $key): void
     {
-        $this->assertNotEmpty(config('redspira.base_url'));
+        $this->assertNotEmpty(config($key));
     }
 
-    public function testConfigHasApiBaseUrl()
+    public function getConfigPKeys(): array
     {
-        $this->assertNotEmpty(config('redspira.api_base_url'));
+        return [
+            ['redspira.base_url'],
+            ['redspira.api_base_url'],
+            ['redspira.endpoints.device'],
+            ['redspira.endpoints.area'],
+            ['redspira.endpoints.area_tree'],
+            ['redspira.endpoints.devices'],
+        ];
     }
 }
