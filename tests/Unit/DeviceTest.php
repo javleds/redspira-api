@@ -21,7 +21,7 @@ class DeviceTest extends BaseTestCaste
     {
         $device = RedspiraApi::device();
         $this->assertSame(
-            '',
+            config('redspira.endpoints.device'),
             $device->getEndpoint()
         );
     }

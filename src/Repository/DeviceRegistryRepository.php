@@ -25,10 +25,8 @@ class DeviceRegistryRepository
         switch ($intervalType) {
             case DeviceParameters::HOUR_INTERVAL:
                 return DateTime::createFromFormat(DeviceParameters::ENDPOINT_DATETIME_FORMAT, $date);
-            case DeviceParameters::DAY_INTERVAL:
-                return DateTime::createFromFormat(DeviceParameters::ENDPOINT_DATE_FORMAT, $date);
             default:
-                return new DateTime();
+                return DateTime::createFromFormat(DeviceParameters::ENDPOINT_DATE_FORMAT, $date);
         }
     }
 }

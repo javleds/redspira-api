@@ -7,6 +7,7 @@ use DateTime;
 use Exception;
 use Illuminate\Support\Collection;
 use Javleds\RedspiraApi\Contract\Api\Device as IDevice;
+use Javleds\RedspiraApi\Contract\HttpClient;
 use Javleds\RedspiraApi\DataParameters\DeviceParameters;
 use Javleds\RedspiraApi\Entity\DeviceRegistry;
 use Javleds\RedspiraApi\Exception\ApiResponseException;
@@ -15,8 +16,11 @@ use Javleds\RedspiraApi\Facade\DeviceRegistryRepository;
 
 class Device extends Api implements IDevice
 {
-    /** @var string  */
-    protected $endpoint = '';
+    public function __construct(HttpClient $client)
+    {
+        parent::__construct($client);
+        $this->endpoint = config('redspira.endpoints.device');
+    }
 
     /**
      * @return Collection<DeviceRegistry>
