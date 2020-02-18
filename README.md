@@ -16,6 +16,8 @@ composer require javleds/redspira-api
 
 ## Usage
 
+### Device
+
 #### Get device registries
 ```
 class SomeClass
@@ -70,6 +72,20 @@ class SomeClass
     }
 }
 ```
+
+### Areas
+
+```
+class SomeClass
+{
+    public function example()
+    {
+        /** @var Collection<Area> $areas **/
+        $areas = \RedspiraApi::areas()->all();        
+    }
+}
+```
+
 
 > Built as part of project: https://github.com/Punksolid/calidad-del-aire
 
