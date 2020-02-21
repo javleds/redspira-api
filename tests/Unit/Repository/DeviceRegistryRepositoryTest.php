@@ -3,7 +3,7 @@
 namespace Javleds\RedspiraApi\Tests\Unit\Repository;
 
 use DateTime;
-use Javleds\RedspiraApi\DataParameters\DeviceParameters;
+use Javleds\RedspiraApi\DataParameters\ApiParameters;
 use Javleds\RedspiraApi\Facade\DeviceRegistryRepository;
 use Javleds\RedspiraApi\Tests\BaseTestCaste;
 use stdClass;
@@ -39,8 +39,8 @@ class DeviceRegistryRepositoryTest extends BaseTestCaste
     public function getIntervals(): array
     {
         return [
-            [DeviceParameters::HOUR_INTERVAL, DeviceParameters::ENDPOINT_DATETIME_FORMAT],
-            [DeviceParameters::DAY_INTERVAL, DeviceParameters::ENDPOINT_DATE_FORMAT],
+            [ApiParameters::HOUR_INTERVAL, ApiParameters::ENDPOINT_DATETIME_FORMAT],
+            [ApiParameters::DAY_INTERVAL, ApiParameters::ENDPOINT_DATE_FORMAT],
         ];
     }
 
@@ -60,10 +60,10 @@ class DeviceRegistryRepositoryTest extends BaseTestCaste
     public function getDates()
     {
         return [
-            [date(DeviceParameters::ENDPOINT_DATE_FORMAT), DeviceParameters::DAY_INTERVAL, false],
-            [date(DeviceParameters::ENDPOINT_DATE_FORMAT), DeviceParameters::HOUR_INTERVAL, true],
-            [date(DeviceParameters::ENDPOINT_DATETIME_FORMAT), DeviceParameters::DAY_INTERVAL, true],
-            [date(DeviceParameters::ENDPOINT_DATETIME_FORMAT), DeviceParameters::HOUR_INTERVAL, false],
+            [date(ApiParameters::ENDPOINT_DATE_FORMAT), ApiParameters::DAY_INTERVAL, false],
+            [date(ApiParameters::ENDPOINT_DATE_FORMAT), ApiParameters::HOUR_INTERVAL, true],
+            [date(ApiParameters::ENDPOINT_DATETIME_FORMAT), ApiParameters::DAY_INTERVAL, true],
+            [date(ApiParameters::ENDPOINT_DATETIME_FORMAT), ApiParameters::HOUR_INTERVAL, false],
         ];
     }
 }

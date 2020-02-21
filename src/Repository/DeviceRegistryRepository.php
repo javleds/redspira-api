@@ -3,7 +3,7 @@
 namespace Javleds\RedspiraApi\Repository;
 
 use DateTime;
-use Javleds\RedspiraApi\DataParameters\DeviceParameters;
+use Javleds\RedspiraApi\DataParameters\ApiParameters;
 use Javleds\RedspiraApi\Entity\DeviceRegistry;
 use stdClass;
 
@@ -23,10 +23,10 @@ class DeviceRegistryRepository
     public function getIntervalDateTime(string $date, string $intervalType): DateTime
     {
         switch ($intervalType) {
-            case DeviceParameters::HOUR_INTERVAL:
-                return DateTime::createFromFormat(DeviceParameters::ENDPOINT_DATETIME_FORMAT, $date);
+            case ApiParameters::HOUR_INTERVAL:
+                return DateTime::createFromFormat(ApiParameters::ENDPOINT_DATETIME_FORMAT, $date);
             default:
-                return DateTime::createFromFormat(DeviceParameters::ENDPOINT_DATE_FORMAT, $date);
+                return DateTime::createFromFormat(ApiParameters::ENDPOINT_DATE_FORMAT, $date);
         }
     }
 }

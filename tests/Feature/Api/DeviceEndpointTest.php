@@ -3,8 +3,8 @@
 namespace Javleds\RedspiraApi\Tests\Feature;
 
 use DateTime;
-use DateTimeZone;
 use Exception;
+use Javleds\RedspiraApi\DataParameters\ApiParameters;
 use Javleds\RedspiraApi\DataParameters\DeviceParameters;
 use Javleds\RedspiraApi\Facade\RedspiraApi;
 use Javleds\RedspiraApi\Tests\BaseTestCaste;
@@ -28,7 +28,7 @@ class DeviceEndpointTest extends BaseTestCaste
             $parameterId,
             $startInterval,
             $endInterval,
-            DeviceParameters::HOUR_INTERVAL
+            ApiParameters::HOUR_INTERVAL
         );
 
         $registries = RedspiraApi::device()->getRegistries($parameters);
@@ -42,8 +42,8 @@ class DeviceEndpointTest extends BaseTestCaste
     public function getParameterIds(): array
     {
         return [
-            [DeviceParameters::PM25_PARAMETER],
-            [DeviceParameters::PM10_PARAMETER],
+            [ApiParameters::PM25_PARAMETER],
+            [ApiParameters::PM10_PARAMETER],
         ];
     }
 
@@ -55,7 +55,7 @@ class DeviceEndpointTest extends BaseTestCaste
         $hours = 12;
         $registries = RedspiraApi::device()->getRegistriesForLastHours(
             self::DEVICE_ID,
-            DeviceParameters::PM10_PARAMETER,
+            ApiParameters::PM10_PARAMETER,
             $hours
         );
 
@@ -73,7 +73,7 @@ class DeviceEndpointTest extends BaseTestCaste
         $days = 2;
         $registries = RedspiraApi::device()->getRegistriesForLastDays(
             self::DEVICE_ID,
-            DeviceParameters::PM10_PARAMETER,
+            ApiParameters::PM10_PARAMETER,
             $days
         );
 

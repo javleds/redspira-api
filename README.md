@@ -26,10 +26,10 @@ class SomeClass
     {
         $parameters = new Javleds\RedspiraApi\DataParameters\DeviceParameters(
             $deviceId, // string Monitor identifier       
-            $parameterId, // string Parameter or pollutant [DeviceParameters::PM25_PARAMETER|DeviceParameters::PM10_PARAMETER]
+            $parameterId, // string Parameter or pollutant [ApiParameters::PM25_PARAMETER|ApiParameters::PM10_PARAMETER]
             $startDate, // DateTime First date for filtering device entries       
             $endDate, // DateTime Last date for filtering device entries      
-            $interval, // string Intervl of time [DeviceParameters::HOUR_INTERVAL|DeviceParameters::MINUTE_INTERVAL]      
+            $interval, // string Intervl of time [ApiParameters::HOUR_INTERVAL|ApiParameters::MINUTE_INTERVAL]      
             $tomeOffset, // (opt) int Time offset       
         );        
         
@@ -48,7 +48,7 @@ class SomeClass
         /** @var Collection<DeviceRegistry> $registries **/
         $registries = \RedspiraApi::device()->getRegistriesForLastHours(
             $deviceId, // string Monitor identifier
-            $parameterId, // string Parameter or pollutant [DeviceParameters::PM25_PARAMETER|DeviceParameters::PM10_PARAMETER]
+            $parameterId, // string Parameter or pollutant [ApiParameters::PM25_PARAMETER|ApiParameters::PM10_PARAMETER]
             $hours, // int Hours of interest before now
             $timeOffset // (opt) int Tome offset
         );        
@@ -65,7 +65,7 @@ class SomeClass
         /** @var Collection<DeviceRegistry> $registries **/
         $registries = \RedspiraApi::device()->getRegistriesForLastDays(
             $deviceId, // string Monitor identifier
-            $parameterId, // string Parameter or pollutant [DeviceParameters::PM25_PARAMETER|DeviceParameters::PM10_PARAMETER]
+            $parameterId, // string Parameter or pollutant [ApiParameters::PM25_PARAMETER|ApiParameters::PM10_PARAMETER]
             $days, // int Days of interest before now
             $timeOffset // (opt) int Tome offset
         );        

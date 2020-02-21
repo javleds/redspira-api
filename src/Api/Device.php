@@ -3,11 +3,11 @@
 namespace Javleds\RedspiraApi\Api;
 
 use Carbon\Carbon;
-use DateTime;
 use Exception;
 use Illuminate\Support\Collection;
 use Javleds\RedspiraApi\Contract\Api\Device as IDevice;
 use Javleds\RedspiraApi\Contract\HttpClient;
+use Javleds\RedspiraApi\DataParameters\ApiParameters;
 use Javleds\RedspiraApi\DataParameters\DeviceParameters;
 use Javleds\RedspiraApi\Entity\DeviceRegistry;
 use Javleds\RedspiraApi\Exception\ApiResponseException;
@@ -57,7 +57,7 @@ class Device extends Api implements IDevice
         $endInterval = Carbon::now($timeOffset);
 
         $startInterval = clone $endInterval;
-        $startInterval->subHours($hours);
+        $startInterval->subHours($hours + 1);
 
 
         $parameters = new DeviceParameters(
@@ -65,7 +65,7 @@ class Device extends Api implements IDevice
             $parameterId,
             $startInterval->toDateTime(),
             $endInterval->toDateTime(),
-            DeviceParameters::HOUR_INTERVAL,
+            ApiParameters::HOUR_INTERVAL,
             $timeOffset
         );
 
@@ -89,7 +89,7 @@ class Device extends Api implements IDevice
             $parameterId,
             $startInterval->toDateTime(),
             $endInterval->toDateTime(),
-            DeviceParameters::DAY_INTERVAL,
+            ApiParameters::DAY_INTERVAL,
             $timeOffset
         );
 
