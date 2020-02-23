@@ -57,8 +57,11 @@ class Device extends Api implements IDevice
         $endInterval = Carbon::now($timeOffset);
 
         $startInterval = clone $endInterval;
-        $startInterval->subHours($hours + 1);
+        $startInterval->subHours($hours);
 
+        if ($endInterval->hour !== 0) {
+            $startInterval->subHours(1);
+        }
 
         $parameters = new DeviceParameters(
             $deviceId,
@@ -83,6 +86,9 @@ class Device extends Api implements IDevice
         $startInterval = clone $endInterval;
         $startInterval->subDays($days);
 
+        if ($endInterval->hour !== 0) {
+            $startInterval->subDays(- 1);
+        }
 
         $parameters = new DeviceParameters(
             $deviceId,
