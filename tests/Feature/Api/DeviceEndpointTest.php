@@ -81,8 +81,6 @@ class DeviceEndpointTest extends BaseTestCaste
 
         $this->assertNotEmpty($registries);
 
-        // Add one to last days in order to get the current day values
-        $expectedRecords = $days + 1;
-        $this->assertSame($expectedRecords, $size);
+        $this->assertSame($days, $size);
     }
 }

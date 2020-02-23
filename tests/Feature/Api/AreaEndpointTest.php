@@ -9,7 +9,7 @@ use Javleds\RedspiraApi\DataParameters\AreaParameters;
 use Javleds\RedspiraApi\Facade\RedspiraApi;
 use Javleds\RedspiraApi\Tests\BaseTestCaste;
 
-class AreasEndpointTest extends BaseTestCaste
+class AreaEndpointTest extends BaseTestCaste
 {
     const AREA_ID = 2002;
 
