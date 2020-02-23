@@ -34,7 +34,7 @@ class SomeClass
         );        
         
         /** @var Collection<DeviceRegistry> $registries **/
-        $registries = \RedspiraApi::device()->getRegistries($parameters);        
+        $registries = \RedspiraApi::device()->get($parameters);        
     }
 }
 ```
@@ -46,7 +46,7 @@ class SomeClass
     public function example()
     {
         /** @var Collection<DeviceRegistry> $registries **/
-        $registries = \RedspiraApi::device()->getRegistriesForLastHours(
+        $registries = \RedspiraApi::device()->getLastHours(
             $deviceId, // string Monitor identifier
             $parameterId, // string Parameter or pollutant [ApiParameters::PM25_PARAMETER|ApiParameters::PM10_PARAMETER]
             $hours, // int Hours of interest before now
@@ -63,7 +63,7 @@ class SomeClass
     public function example()
     {
         /** @var Collection<DeviceRegistry> $registries **/
-        $registries = \RedspiraApi::device()->getRegistriesForLastDays(
+        $registries = \RedspiraApi::device()->getLastDays(
             $deviceId, // string Monitor identifier
             $parameterId, // string Parameter or pollutant [ApiParameters::PM25_PARAMETER|ApiParameters::PM10_PARAMETER]
             $days, // int Days of interest before now

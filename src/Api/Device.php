@@ -27,7 +27,7 @@ class Device extends Api implements IDevice
      * @throws IncompleteParametersException
      * @throws ApiResponseException
      */
-    public function getRegistries(DeviceParameters $parameters)
+    public function get(DeviceParameters $parameters)
     {
         $responseRegistries = $this->getClient()->get($this->endpoint, $parameters->prepare());
 
@@ -52,7 +52,7 @@ class Device extends Api implements IDevice
      * @return Collection<DeviceRegistry>
      * @throws Exception
      */
-    public function getRegistriesForLastHours(string $deviceId, string $parameterId, int $hours, int $timeOffset = -7)
+    public function getLastHours(string $deviceId, string $parameterId, int $hours, int $timeOffset = -7)
     {
         $endInterval = Carbon::now($timeOffset);
 
@@ -72,14 +72,14 @@ class Device extends Api implements IDevice
             $timeOffset
         );
 
-        return $this->getRegistries($parameters);
+        return $this->get($parameters);
     }
 
     /**
      * @return Collection<DeviceRegistry>
      * @throws Exception
      */
-    public function getRegistriesForLastDays(string $deviceId, string $parameterId, int $days, int $timeOffset = -7)
+    public function getLastDays(string $deviceId, string $parameterId, int $days, int $timeOffset = -7)
     {
         $endInterval = Carbon::now($timeOffset);
 
@@ -99,6 +99,6 @@ class Device extends Api implements IDevice
             $timeOffset
         );
 
-        return $this->getRegistries($parameters);
+        return $this->get($parameters);
     }
 }
