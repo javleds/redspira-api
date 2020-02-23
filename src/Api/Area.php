@@ -3,31 +3,30 @@
 namespace Javleds\RedspiraApi\Api;
 
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Support\Collection;
-use Javleds\RedspiraApi\Contract\Api\Device as IDevice;
+use Javleds\RedspiraApi\Contract\Api\Area as IArea;
 use Javleds\RedspiraApi\Contract\HttpClient;
 use Javleds\RedspiraApi\DataParameters\ApiParameters;
-use Javleds\RedspiraApi\DataParameters\DeviceParameters;
-use Javleds\RedspiraApi\Entity\DeviceRegistry;
+use Javleds\RedspiraApi\DataParameters\AreaParameters;
+use Javleds\RedspiraApi\Entity\AreaRegistry;
 use Javleds\RedspiraApi\Exception\ApiResponseException;
 use Javleds\RedspiraApi\Exception\DataParameters\IncompleteParametersException;
 use Javleds\RedspiraApi\Facade\DeviceRegistryRepository;
 
-class Device extends Api implements IDevice
+class Area extends Api implements IArea
 {
     public function __construct(HttpClient $client)
     {
         parent::__construct($client);
-        $this->endpoint = config('redspira.endpoints.device');
+        $this->endpoint = config('redspira.endpoints.area');
     }
 
     /**
-     * @return Collection<DeviceRegistry>
-     * @throws IncompleteParametersException
+     * @return Collection<AreaRegistry>
      * @throws ApiResponseException
+     * @throws IncompleteParametersException
      */
-    public function getRegistries(DeviceParameters $parameters)
+    public function get(AreaParameters $parameters)
     {
         $responseRegistries = $this->getClient()->get($this->endpoint, $parameters->prepare());
 
@@ -49,19 +48,20 @@ class Device extends Api implements IDevice
     }
 
     /**
-     * @return Collection<DeviceRegistry>
-     * @throws Exception
+     * @return Collection<AreaRegistry>
+     * @throws ApiResponseException
+     * @throws IncompleteParametersException
      */
-    public function getRegistriesForLastHours(string $deviceId, string $parameterId, int $hours, int $timeOffset = -7)
+    public function getLastHours(string $areaId, string $parameterId, int $hours, int $timeOffset = -7)
     {
         $endInterval = Carbon::now($timeOffset);
 
         $startInterval = clone $endInterval;
-        $startInterval->subHours($hours + 1);
+        $startInterval->subHours($hours);
 
 
-        $parameters = new DeviceParameters(
-            $deviceId,
+        $parameters = new AreaParameters(
+            $areaId,
             $parameterId,
             $startInterval->toDateTime(),
             $endInterval->toDateTime(),
@@ -69,14 +69,15 @@ class Device extends Api implements IDevice
             $timeOffset
         );
 
-        return $this->getRegistries($parameters);
+        return $this->get($parameters);
     }
 
     /**
-     * @return Collection<DeviceRegistry>
-     * @throws Exception
+     * @return Collection<AreaRegistry>
+     * @throws ApiResponseException
+     * @throws IncompleteParametersException
      */
-    public function getRegistriesForLastDays(string $deviceId, string $parameterId, int $days, int $timeOffset = -7)
+    public function getLastDays(string $areaId, string $parameterId, int $days, int $timeOffset = -7)
     {
         $endInterval = Carbon::now($timeOffset);
 
@@ -84,8 +85,8 @@ class Device extends Api implements IDevice
         $startInterval->subDays($days);
 
 
-        $parameters = new DeviceParameters(
-            $deviceId,
+        $parameters = new AreaParameters(
+            $areaId,
             $parameterId,
             $startInterval->toDateTime(),
             $endInterval->toDateTime(),
@@ -93,6 +94,6 @@ class Device extends Api implements IDevice
             $timeOffset
         );
 
-        return $this->getRegistries($parameters);
+        return $this->get($parameters);
     }
 }

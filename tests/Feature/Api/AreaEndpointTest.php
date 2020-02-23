@@ -1,37 +1,37 @@
 <?php
 
-namespace Javleds\RedspiraApi\Tests\Feature;
+namespace Javleds\RedspiraApi\Tests\Feature\Api;
 
 use DateTime;
 use Exception;
 use Javleds\RedspiraApi\DataParameters\ApiParameters;
-use Javleds\RedspiraApi\DataParameters\DeviceParameters;
+use Javleds\RedspiraApi\DataParameters\AreaParameters;
 use Javleds\RedspiraApi\Facade\RedspiraApi;
 use Javleds\RedspiraApi\Tests\BaseTestCaste;
 
-class DeviceEndpointTest extends BaseTestCaste
+class AreaEndpointTest extends BaseTestCaste
 {
-    const DEVICE_ID = 'A0034';
+    const AREA_ID = 2002;
 
     /**
      * @dataProvider getParameterIds
      *
      * @throws Exception
      */
-    public function testDeviceGetRegistries(string $parameterId)
+    public function testGetRegistries(string $parameterId)
     {
         $startInterval = DateTime::createFromFormat('Y-m-d H:i:s', '2000-01-01 00:00:00');
         $endInterval = DateTime::createFromFormat('Y-m-d H:i:s', '2020-02-08 00:00:00');
 
-        $parameters = new DeviceParameters(
-            self::DEVICE_ID,
+        $parameters = new AreaParameters(
+            self::AREA_ID,
             $parameterId,
             $startInterval,
             $endInterval,
             ApiParameters::HOUR_INTERVAL
         );
 
-        $registries = RedspiraApi::device()->getRegistries($parameters);
+        $registries = RedspiraApi::area()->get($parameters);
 
         $this->assertNotEmpty($registries);
     }
@@ -50,11 +50,11 @@ class DeviceEndpointTest extends BaseTestCaste
     /**
      * @throws Exception
      */
-    public function testDeviceGetRegistriesByHours()
+    public function testGetRegistriesByHours()
     {
         $hours = 12;
-        $registries = RedspiraApi::device()->getRegistriesForLastHours(
-            self::DEVICE_ID,
+        $registries = RedspiraApi::area()->getLastHours(
+            self::AREA_ID,
             ApiParameters::PM10_PARAMETER,
             $hours
         );
@@ -68,11 +68,11 @@ class DeviceEndpointTest extends BaseTestCaste
     /**
      * @throws Exception
      */
-    public function testDeviceGetRegistriesByDays()
+    public function testGetRegistriesByDays()
     {
         $days = 2;
-        $registries = RedspiraApi::device()->getRegistriesForLastDays(
-            self::DEVICE_ID,
+        $registries = RedspiraApi::area()->getLastDays(
+            self::AREA_ID,
             ApiParameters::PM10_PARAMETER,
             $days
         );
@@ -81,6 +81,8 @@ class DeviceEndpointTest extends BaseTestCaste
 
         $this->assertNotEmpty($registries);
 
-        $this->assertSame($days, $size);
+        // Add one to last days in order to get the current day values
+        $expectedRecords = $days;
+        $this->assertSame($expectedRecords, $size);
     }
 }

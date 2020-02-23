@@ -7,7 +7,7 @@ use Javleds\RedspiraApi\DataParameters\ApiParameters;
 use Javleds\RedspiraApi\Entity\DeviceRegistry;
 use stdClass;
 
-class DeviceRegistryRepository
+class AreaRegistryRepository
 {
     public function apiRegistryToDeviceRegistry(stdClass $apiRecord, string $interval): DeviceRegistry
     {

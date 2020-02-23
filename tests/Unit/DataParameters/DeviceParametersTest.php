@@ -2,8 +2,9 @@
 
 namespace Javleds\RedspiraApi\Tests\Unit\DataParameters;
 
+use Javleds\RedspiraApi\DataParameters\ApiParameters;
 use Javleds\RedspiraApi\DataParameters\DeviceParameters;
-use Javleds\RedspiraApi\Exception\DataParameters\InvalidIdParameterException;
+use Javleds\RedspiraApi\Exception\DataParameters\InvalidParameterIdException;
 use Javleds\RedspiraApi\Exception\DataParameters\InvalidIntervalValueException;
 use Javleds\RedspiraApi\Tests\BaseTestCaste;
 
@@ -21,7 +22,7 @@ class DeviceParametersTest extends BaseTestCaste
     public function testDeviceParametersOnlyReceivesValidParameterIds(string $parameterId, bool $shouldThrowException)
     {
         if ($shouldThrowException) {
-            $this->expectException(InvalidIdParameterException::class);
+            $this->expectException(InvalidParameterIdException::class);
         }
 
         $deviceParameters = new DeviceParameters(
@@ -29,10 +30,10 @@ class DeviceParametersTest extends BaseTestCaste
             $parameterId,
             now(),
             now(),
-            DeviceParameters::HOUR_INTERVAL
+            ApiParameters::HOUR_INTERVAL
         );
 
-        $this->assertSame($parameterId, $deviceParameters->getIdParameter());
+        $this->assertSame($parameterId, $deviceParameters->getParameterId());
     }
 
     public function getParameters(): array
@@ -40,8 +41,8 @@ class DeviceParametersTest extends BaseTestCaste
         return [
             ['someWord', true],
             ['', true],
-            [DeviceParameters::PM10_PARAMETER, false],
-            [DeviceParameters::PM25_PARAMETER, false],
+            [ApiParameters::PM10_PARAMETER, false],
+            [ApiParameters::PM25_PARAMETER, false],
         ];
     }
 
@@ -74,10 +75,10 @@ class DeviceParametersTest extends BaseTestCaste
     public function getIntervals(): array
     {
         return [
-            [DeviceParameters::PM10_PARAMETER, 'someWord', true],
-            [DeviceParameters::PM10_PARAMETER, '', true],
-            [DeviceParameters::PM10_PARAMETER, DeviceParameters::HOUR_INTERVAL, false],
-            [DeviceParameters::PM10_PARAMETER, DeviceParameters::DAY_INTERVAL, false],
+            [ApiParameters::PM10_PARAMETER, 'someWord', true],
+            [ApiParameters::PM10_PARAMETER, '', true],
+            [ApiParameters::PM10_PARAMETER, ApiParameters::HOUR_INTERVAL, false],
+            [ApiParameters::PM10_PARAMETER, ApiParameters::DAY_INTERVAL, false],
         ];
     }
 }

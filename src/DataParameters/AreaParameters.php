@@ -4,13 +4,14 @@ namespace Javleds\RedspiraApi\DataParameters;
 
 use DateTime;
 
-class DeviceParameters extends ApiParameters
+class AreaParameters extends ApiParameters
 {
+
     /** @var string */
-    private $monitorId;
+    private $areaId;
 
     public function __construct(
-        string $monitorId,
+        string $areaId,
         string $parameterId,
         DateTime $startDate,
         DateTime $endDate,
@@ -24,30 +25,30 @@ class DeviceParameters extends ApiParameters
             $interval,
             $timeOffset
         );
-        $this->setMonitorId($monitorId);
+        $this->setAreaId($areaId);
     }
 
-    public function getMonitorId(): string
+    public function getAreaId(): string
     {
-        return $this->monitorId;
+        return $this->areaId;
     }
 
-    public function setMonitorId(string $monitorId): void
+    public function setAreaId(string $areaId): void
     {
-        $this->monitorId = $monitorId;
+        $this->areaId = $areaId;
     }
 
     public function getParameters(): array
     {
         return [
-            'idmonitor' => $this->monitorId,
+            'idarea' => $this->areaId,
         ];
     }
 
     public function getRequiredFields(): array
     {
         return [
-            'monitorId',
+            'areaId',
         ];
     }
 }
