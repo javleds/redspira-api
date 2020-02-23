@@ -3,10 +3,12 @@
 namespace Javleds\RedspiraApi;
 
 use GuzzleHttp\ClientInterface;
+use Javleds\RedspiraApi\Api\Area;
 use Javleds\RedspiraApi\Api\Areas;
 use Javleds\RedspiraApi\Api\Device;
 use Javleds\RedspiraApi\Contract\Api\Device as IDevice;
 use Javleds\RedspiraApi\Contract\Api\Areas as IAreas;
+use Javleds\RedspiraApi\Contract\Api\Area as IArea;
 use Javleds\RedspiraApi\Contract\HttpClient;
 
 class Redspira
@@ -31,5 +33,10 @@ class Redspira
     public function areas(): IAreas
     {
         return new Areas($this->apiClient);
+    }
+
+    public function area(): IArea
+    {
+        return new Area($this->apiClient);
     }
 }
