@@ -11,15 +11,15 @@ interface Device extends Api
     /**
      * @return Collection<DeviceRegistry>
      */
-    public function getRegistries(DeviceParameters $parameters);
+    public function get(DeviceParameters $parameters);
 
     /**
      * @return Collection<DeviceRegistry>
      */
-    public function getRegistriesForLastHours(string $device, string $parameterId, int $hours);
+    public function getLastHours(string $device, string $parameterId, int $hours);
 
     /**
      * @return Collection<DeviceRegistry>
      */
-    public function getRegistriesForLastDays(string $device, string $parameterId, int $days);
+    public function getLastDays(string $device, string $parameterId, int $days);
 }

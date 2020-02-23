@@ -31,7 +31,7 @@ class DeviceEndpointTest extends BaseTestCaste
             ApiParameters::HOUR_INTERVAL
         );
 
-        $registries = RedspiraApi::device()->getRegistries($parameters);
+        $registries = RedspiraApi::device()->get($parameters);
 
         $this->assertNotEmpty($registries);
     }
@@ -53,7 +53,7 @@ class DeviceEndpointTest extends BaseTestCaste
     public function testDeviceGetRegistriesByHours()
     {
         $hours = 12;
-        $registries = RedspiraApi::device()->getRegistriesForLastHours(
+        $registries = RedspiraApi::device()->getLastHours(
             self::DEVICE_ID,
             ApiParameters::PM10_PARAMETER,
             $hours
@@ -71,7 +71,7 @@ class DeviceEndpointTest extends BaseTestCaste
     public function testDeviceGetRegistriesByDays()
     {
         $days = 2;
-        $registries = RedspiraApi::device()->getRegistriesForLastDays(
+        $registries = RedspiraApi::device()->getLastDays(
             self::DEVICE_ID,
             ApiParameters::PM10_PARAMETER,
             $days
