@@ -86,6 +86,9 @@ class Device extends Api implements IDevice
         $startInterval = clone $endInterval;
         $startInterval->subDays($days);
 
+        if ($endInterval->hour !== 0) {
+            $startInterval->subDays(- 1);
+        }
 
         $parameters = new DeviceParameters(
             $deviceId,

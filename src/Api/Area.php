@@ -87,6 +87,9 @@ class Area extends Api implements IArea
         $startInterval = clone $endInterval;
         $startInterval->subDays($days);
 
+        if ($endInterval->hour !== 0) {
+            $startInterval->subDays(- 1);
+        }
 
         $parameters = new AreaParameters(
             $areaId,
