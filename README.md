@@ -18,6 +18,17 @@ composer require javleds/redspira-api
 
 ### Device
 
+```
+class SomeClass
+{
+    public function example()
+    {
+        /** @var Collection<Device> $devices **/
+        $devices = \RedspiraApi::devices()->all();        
+    }
+}
+```
+
 #### Get device registries
 ```
 class SomeClass

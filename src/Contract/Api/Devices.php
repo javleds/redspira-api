@@ -3,12 +3,12 @@
 namespace Javleds\RedspiraApi\Contract\Api;
 
 use Illuminate\Support\Collection;
-use Javleds\RedspiraApi\Entity\Area;
+use Javleds\RedspiraApi\Entity\Device;
 
-interface Areas extends Api
+interface Devices extends Api
 {
     /**
-     * @return Collection<Area>
+     * @return Collection<Device>
      */
     public function all();
 }
