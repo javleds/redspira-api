@@ -33,6 +33,10 @@ class RedspiraApiServiceProvider extends ServiceProvider
             return new \Javleds\RedspiraApi\Repository\AreaRegistryRepository();
         });
 
+        $this->app->singleton('device-repository', static function () {
+            return new \Javleds\RedspiraApi\Repository\DeviceRepository();
+        });
+
         $this->app->singleton('device-registry-repository', static function () {
             return new \Javleds\RedspiraApi\Repository\DeviceRegistryRepository();
         });

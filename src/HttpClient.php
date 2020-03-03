@@ -68,6 +68,7 @@ class HttpClient implements IHttpClient
         switch ($contentType) {
             case 'application/json':
                 return json_decode($response->getBody()->getContents());
+            case 'text/plain; charset=':
             case 'text/plain; charset=UTF-8':
                 $content = $response->getBody()->getContents();
                 return json_decode(trim($content));
